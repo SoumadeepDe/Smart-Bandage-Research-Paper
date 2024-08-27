@@ -22,7 +22,7 @@ Else if CPU2 reports RX_OK_READY
       •	switch channel number to current device UDN number
       •	set ACK timeout to 1ms
       •	transmit “1\r” to central unit
-      •	go back to reception mode (COMMAND EXECUTION PHASE).
+      •	go back to reception mode (COMMAND EXECUTION PHASE / DATA ACQUISITION PHASE).
     }
     Else if <command> transmitted was “SEND_DATA\r”
     {
@@ -31,7 +31,7 @@ Else if CPU2 reports RX_OK_READY
       •	switch channel number to current device UDN number
       •	set ACK timeout to 1ms
       •	Transmit the data received from the other smart bandage MCU to the Central unit.
-      •	go back to reception mode (COMMAND EXECUTION PHASE).
+      •	go back to reception mode (COMMAND EXECUTION PHASE / DATA ACQUISITION PHASE).
     }
   }
   Else
@@ -40,7 +40,7 @@ Else if CPU2 reports RX_OK_READY
     •	switch channel number to current device UDN number
     •	set ACK timeout to 1ms
     •	transmit “0\r” to central unit
-    •	go back to reception mode (COMMAND EXECUTION PHASE).
+    •	go back to reception mode (COMMAND EXECUTION PHASE / DATA ACQUISITION PHASE).
   }
 }
 Else if CPU2 reports RX_TIMEOUT_READY
@@ -50,7 +50,7 @@ Else if CPU2 reports RX_TIMEOUT_READY
     •	switch channel number to current device UDN number
     •	set ACK timeout to 1ms
     •	transmit “0\r” to central unit
-    •	go back to reception mode (COMMAND EXECUTION PHASE).
+    •	go back to reception mode (COMMAND EXECUTION PHASE / DATA ACQUISITION PHASE).
   }
 Else
 {
@@ -59,6 +59,6 @@ Else
   •	switch channel number to current device UDN number
   •	set ACK timeout to 1ms
   •	transmit “0\r” to central unit
-  •	go back to reception mode (COMMAND EXECUTION PHASE).
+  •	go back to reception mode (COMMAND EXECUTION PHASE / DATA ACQUISITION PHASE).
 }
 
