@@ -1,4 +1,5 @@
 The BLE communication is programmed to perform with the acknowledge (ACK) function, meaning when the sender sends the data, upon successful reception from the receiver, the receiver sends ACK to the sender. These states of communication are reported by CPU2 and can be used to evaluate the status of communication and take necessary action. Also, the communication is encrypted for safety against snooping. The program uses a default key and initialization vector for encryption.
+
 The table below shows all the different states that are reported by CPU2:
 | State	| Description |
 | --- | --- |
@@ -16,6 +17,7 @@ The table below shows all the different states that are reported by CPU2:
 | RX_CRC_KO_BUSY	| Reception failed CRC, Radio Ready |
 
 *CRC stands for Cyclic Redundancy Check
+
 For successful transmission, the sender MCU CPU2 goes through the following states:
 i.	TX_OK_BUSY: CPU2 is sending data, therefore it is busy.
 ii.	RX_OK_READY: CPU2 has received data from the receiver, the CPU1 checks if the data received is in fact ACK; if it is ACK, the communication is evaluated as successful.
