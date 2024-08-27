@@ -12,23 +12,23 @@ Else if CPU2 reports RX_OK_READY
 {
   If the data received is ACK
   {
-    Go to reception mode (COMMAND EXECUTION PHASE) and stay in this mode till any data is received from the central unit MCU.
+    Go to reception mode (COMMAND EXECUTION PHASE / DATA ACQUISITION PHASE) and stay in this mode till any data is received from the central unit MCU.
   }
   Else
   {
-    Wait for 1 second and retry transmitting information 5 times, if still don’t get an ACK, go back to reception mode (COMMAND EXECUTION PHASE).
+    Wait for 1 second and retry transmitting information 5 times, if still don’t get an ACK, go back to reception mode (COMMAND EXECUTION PHASE / DATA ACQUISITION PHASE).
     Please note that all the data still is available. Data gets overwritten if START_CALC command is received.
   }
 Else if CPU2 reports RX_TIMEOUT_READY
 {
   [ACK not received from central unit=>means that central unit is not in listening mode or is out of range]
-  Wait for 1 second and retry transmitting information 5 times, if still don’t get an ACK, go back to reception mode (COMMAND EXECUTION PHASE).
+  Wait for 1 second and retry transmitting information 5 times, if still don’t get an ACK, go back to reception mode (COMMAND EXECUTION PHASE / DATA ACQUISITION PHASE).
   Please note that all the data still is available. Data gets overwritten if START_CALC command is received.
 }
 Else
 {
   [Communication failed due to some other reason]
-  Wait for 1 second and retry transmitting information 5 times, if still don’t get an ACK, go back to reception mode (COMMAND EXECUTION PHASE).
+  Wait for 1 second and retry transmitting information 5 times, if still don’t get an ACK, go back to reception mode (COMMAND EXECUTION PHASE / DATA ACQUISITION PHASE).
   Please note that all the data still is available. Data gets overwritten if START_CALC command is received.
 }
 ```
