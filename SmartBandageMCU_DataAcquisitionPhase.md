@@ -33,7 +33,7 @@ Else if data received is “SEND_DATA\r”
 {
   Please refer to section on SEND_DATA command
 }
-Else if data received is “LOOK_FOR_LEAF <leaf UDN number>\n<command>\r”
+Else if data received is “LOOK_FOR_LEAF" <leaf UDN number>\n<command>\r”
 {
   Please refer to section on LOOK_FOR_LEAF” command
 }
