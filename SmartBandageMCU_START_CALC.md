@@ -36,5 +36,5 @@ Note that a delay of 100ms is necessary between each measurement as it takes tim
 12)	All the sensor data for sensor node 0 is returned to the “BME688_Program_Run” function.
 
 The data points received as an output from “BME688_Program_Run” function are saved in an array.
-
-Additionally, “BME688_Program_Run” function is called 7 more times. Therefore, the total number of data points come to 8*8*4 = 256 (8 times “BME688_Program_Run” function call * 8 sensor nodes * 4 data points measured per sensor). As mentioned above, after each “BME688_Program_Run” function call, the data points are stored in an array. This results in an array with a length of 256 data points. This array length is and should be inline with the data measured during the ML training stage. 
+ 
+Additionally, “BME688_Program_Run” function is called 7 more times. Therefore, the total number of data points come to 8 * 8 * 4 = 256 (8 times “BME688_Program_Run” function call * 8 sensor nodes * 4 data points measured per sensor). As mentioned above, after each “BME688_Program_Run” function call, the data points are stored in an array. This results in an array with a length of 256 data points. This array length is and should be inline with the data measured during the ML training stage. 
