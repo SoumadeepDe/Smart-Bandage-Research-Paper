@@ -14,6 +14,7 @@ The table below shows all the different states that are reported by CPU2:
 | RX_TIMEOUT_READY	| Reception timed out, Radio Ready |
 | RX_CRC_KO_READY	| Reception failed CRC*, Radio Busy |
 | RX_CRC_KO_BUSY	| Reception failed CRC, Radio Ready |
+
 *CRC stands for Cyclic Redundancy Check
 For successful transmission, the sender MCU CPU2 goes through the following states:
 i.	TX_OK_BUSY: CPU2 is sending data, therefore it is busy.
