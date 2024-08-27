@@ -19,10 +19,17 @@ The table below shows all the different states that are reported by CPU2:
 *CRC stands for Cyclic Redundancy Check
 
 For successful transmission, the sender MCU CPU2 goes through the following states:
+
 i.	TX_OK_BUSY: CPU2 is sending data, therefore it is busy.
+
 ii.	RX_OK_READY: CPU2 has received data from the receiver, the CPU1 checks if the data received is in fact ACK; if it is ACK, the communication is evaluated as successful.
+
 If CPU2 returns any other state listed in table after TX_OK_BUSY, or if the data received is not ACK, the communication is evaluated as failed.
+
 For successful reception, the receiver MCU CPU2 goes through the following states:
+
 i.	RX_OK_BUSY: CPU2 has received data, CPU2 is sending ACK and it therefore busy
+
 ii.	TX_OK_READY: CPU2 has sent ACK to the sender.
+
 If CPU2 returns any other state listed in table after RX_OK_BUSY, the communication is evaluated as failed.
