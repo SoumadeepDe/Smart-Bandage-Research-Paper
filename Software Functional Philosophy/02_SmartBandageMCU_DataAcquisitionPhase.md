@@ -38,8 +38,8 @@ Else if data received is “LOOK_FOR_LEAF" <leaf UDN number>\n<command>\r”
   Please refer to section on LOOK_FOR_LEAF” command
 }
 ```
-[Link to Smart Bandage MCU START_CALC command details](https://github.com/SoumadeepDe/Smart-Bandage-Software-Functional-Philosophy/blob/main/SmartBandageMCU_START_CALC.md)
+[Link to Smart Bandage MCU START_CALC command details](https://github.com/SoumadeepDe/Smart-Bandage-Research-Paper/blob/main/Software%20Functional%20Philosophy/05_SmartBandageMCU_START_CALC.md)
 
-[Link to Smart Bandage MCU SEND_DATA command details](https://github.com/SoumadeepDe/Smart-Bandage-Software-Functional-Philosophy/blob/main/SmartBandageMCU_SEND_DATA.md)
+[Link to Smart Bandage MCU SEND_DATA command details](https://github.com/SoumadeepDe/Smart-Bandage-Research-Paper/blob/main/Software%20Functional%20Philosophy/04_SmartBandageMCU_SEND_DATA.md)
 
-[Link to Smart Bandage MCU LOOK_FOR_LEAF command details](https://github.com/SoumadeepDe/Smart-Bandage-Software-Functional-Philosophy/blob/main/SmartBandageMCU_LOOK_FOR_LEAF.md)
+[Link to Smart Bandage MCU LOOK_FOR_LEAF command details](https://github.com/SoumadeepDe/Smart-Bandage-Research-Paper/blob/main/Software%20Functional%20Philosophy/06_SmartBandageMCU_LOOK_FOR_LEAF.md)
