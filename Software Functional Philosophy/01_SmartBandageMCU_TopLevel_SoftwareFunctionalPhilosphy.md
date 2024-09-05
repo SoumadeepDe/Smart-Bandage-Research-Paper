@@ -2,8 +2,7 @@ This section details the software programming implemented on the MCUs in the sma
 
 At startup (or Main PCB Power UP), the smart bandage MCU goes through the system initialization phase. In this phase, the MCU is programmed to initialize all the hardware configurations that will be used by the MCU: 
 1)	Initialize the HAL Library (provided by STMicroelectronics)
-2)	The system clock (SYSCLK) is programmed to run using MSI (Medium Speed Internal clock) oscillator. MSI is programmed to run at 32 MHz. This is done because in order for CPU2 to perform BLE communication it has to run at 32 MHz, however, the CPU1 speed can be varied by changing the pre-scalar (CPU1 HPRE). In the upcoming section, detailed analysis of power consumption by changing this prescale to CPU1 is carried out and discussed.
-3)	Initialize clock source for all peripherals:
+2)	The system clock (SYSCLK) is programmed to run using MSI (Medium Speed Internal clock) oscillator. MSI is programmed to run at 32 MHz. This is done because in order for CPU2 to perform BLE communication it has to run at 32 MHz, however, the CPU1 speed can be varied by changing the pre-scalar (CPU1 HPRE).
     -  RF Wakeup peripheral, clock source => LSE (Low Speed External) oscillator => 32.768kHz
     -  UART1 peripheral, clock source => HSI => 16MHz
     -  LPUART1 peripheral, clock source => HSI => 16MHz
