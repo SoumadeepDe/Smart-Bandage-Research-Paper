@@ -1,127 +1,97 @@
 # **Smart Bandage Research Project**
 
-The **Smart Bandage Research Project** integrates advanced sensors, machine learning, and wireless communication to monitor wound healing in real-time. This system is designed to provide healthcare providers with actionable insights by tracking critical wound parameters such as temperature, humidity, gas resistance, and pH levels. The **Central Unit (CU)** coordinates communication with multiple smart bandages, sending commands to manage operations, collect data, and maintain a scalable network.
+This repository showcases a **Smart Bandage Network** for autonomous wound monitoring. The system integrates **Bluetooth Low Energy (BLE)** communication, advanced sensors, and distributed machine learning for real-time health tracking. Each smart bandage independently collects and processes data, and the **Central Unit (CU)** coordinates network communication with commands such as `START_CALC`, `SEND_DATA`, and `LOOK_FOR_LEAF`.
 
 ---
 
-## **Project Overview**
+## **System Overview**
 
-The smart bandage system includes:
-- **Smart Bandages**: Wearable devices with embedded sensors and BLE communication capabilities.
-- **Central Unit (CU)**: A coordinating hub that sends commands to the bandages, retrieves data, and processes it for actionable insights.
-- **Wireless Communication**: BLE is used for efficient data transmission between the CU and bandages.
+### **Key Features**
+- **Multi-parameter Sensing**: Measures temperature, pressure, humidity, and gas resistance using integrated BME688 sensors.
+- **Scalable Network**: Manages thousands of bandages with dynamic registration and communication.
+- **Machine Learning Integration**: Employs on-device ML models for anomaly detection.
+- **Inter-bandage Connectivity**: Relays data through nearby bandages when out of direct CU range.
+
+---
+
+## **System Commands**
+
+### **1. START_CALC**
+- **Purpose**: Instructs smart bandages to begin collecting sensor data.
+- **Process**:
+  1. CU sends the `START_CALC` command to all registered bandages.
+  2. Bandages activate their sensors via I²C communication and collect data sequentially.
+  3. Ensures that all sensing nodes (up to 16 per bandage) acquire readings.
+
+### **2. SEND_DATA**
+- **Purpose**: Triggers bandages to transmit collected data to the CU.
+- **Process**:
+  1. After data collection, the CU issues the `SEND_DATA` command.
+  2. Bandages package their data and transmit it over BLE.
+  3. CU receives and processes data, forwarding it to the edge unit for visualization and storage.
+
+### **3. LOOK_FOR_LEAF**
+- **Purpose**: Ensures communication reliability by finding unresponsive bandages.
+- **Process**:
+  1. CU sends the `LOOK_FOR_LEAF` command to a deputy bandage (D-CU).
+  2. The D-CU attempts to communicate with the unresponsive bandage.
+  3. Data is collected and relayed back to the CU, ensuring no data loss.
 
 ---
 
 ## **Repository Structure**
 
-### 1. **Battery Simulation**
-Contains MATLAB scripts for simulating battery performance, optimizing power usage to extend the smart bandage’s lifespan.
+### **1. Program Explaination**
+Contains explaination for:
+- **Smart Bandages**: Handles sensor control, BLE communication, and ML data processing.
+- **Central Unit (CU)**: Manages network discovery, command issuance, and data aggregation.
 
-### 2. **Programming CPU2 on WB55**
-Provides code examples and instructions for programming the WB55 microcontroller's secondary CPU (CPU2), a critical component of the bandage’s operations.
+### **2. Machine Learning**
+Includes NanoEdge AI configurations for on-device ML:
+- **ML Training Data**: Collected from controlled environmental tests.
+- **ML Models**: Supports anomaly detection and multi-parameter classification.
 
-### 3. **Software Functional Philosophy**
-Outlines the system’s modular design, focusing on efficient communication, sensor data acquisition, and machine learning integration.
-
----
-
-## **Command Communication: Central Unit and Smart Bandages**
-
-### **Overview**
-The Central Unit (CU) serves as the command hub, coordinating with multiple smart bandages in the network. Commands sent by the CU control the following operations:
-1. **Device Discovery**: Ensures all bandages in the network are identified and connected.
-2. **Data Collection**: Triggers the bandages to send sensor data to the CU for processing.
-3. **Operational Management**: Commands such as firmware updates and sensor reinitialization.
+### **3. Battery Simulation**
+MATLAB scripts for simulating battery discharge profiles under various clock speeds and operational phases.
 
 ---
 
-### **Key Commands**
+## **System Architecture**
 
-#### **LookForLeaf Command**
-- **Purpose**:
-  - Sent by the CU to discover active smart bandages in the network.
-  - Ensures the scalability of the system by efficiently identifying devices in large-scale deployments.
-- **Operation**:
-  - The CU broadcasts the `LookForLeaf` command across its network.
-  - Smart bandages respond by transmitting their unique identifiers, status, and connectivity details.
-- **Significance**:
-  - Maintains network integrity by detecting new, dormant, or disconnected bandages.
-  - Reduces redundant communication, optimizing bandwidth and power usage.
+### **Hardware Components**
+- **Smart Bandages**: Flexible PCBs with BME688 sensors and STM32WB55 microcontrollers.
+- **Central Unit (CU)**: Dual-core STM32WB55 MCU for BLE communication.
+- **Edge Unit**: Raspberry Pi 4 for data visualization and storage using Grafana.
 
-#### **StartDataAcquisition Command**
-- **Purpose**:
-  - Instructs smart bandages to begin sensor data collection.
-- **Operation**:
-  - Bandages activate their sensors to measure parameters such as temperature, humidity, and pH.
-  - Data is queued and sent back to the CU for processing.
+### **Communication Workflow**
+1. **Discovery Phase**:
+   - Bandages register with the CU upon activation.
+   - CU assigns unique communication channels.
 
-#### **UpdateFirmware Command**
-- **Purpose**:
-  - Enables remote firmware updates for the smart bandages, ensuring they remain up-to-date.
-- **Operation**:
-  - The CU transfers the new firmware to the bandages in chunks.
-  - Bandages verify and install the update.
+2. **Data Acquisition Phase**:
+   - CU issues `START_CALC` to collect sensor data.
+   - CU then triggers `SEND_DATA` for data transmission.
+   - Data is processed and visualized on the edge unit.
 
-#### **ReinitializeSensor Command**
-- **Purpose**:
-  - Resets and reinitializes specific sensors on the bandage in case of errors or calibration needs.
+3. **Fallback Mechanism**:
+   - If a bandage is unresponsive, `LOOK_FOR_LEAF` is issued to nearby bandages for indirect data retrieval.
 
 ---
 
-## **Key Features of the System**
+## **Data Visualization**
 
-### **Sensors**
-- **Temperature Monitoring**: Detects potential infections.
-- **Humidity Tracking**: Ensures optimal healing conditions.
-- **Gas Resistance Measurement**: Provides diagnostic insights into wound status.
-- **pH Sensing**: Tracks wound acidity to detect complications.
-
-### **Machine Learning Integration**
-- Processes data using n-class classification algorithms to classify wound status.
-- Enables real-time anomaly detection and predictive analytics.
-
-### **Wireless Communication**
-- Utilizes BLE for low-power, reliable data transmission.
-- Supports a scalable network capable of managing thousands of smart bandages.
-
----
-
-## **How It Works**
-
-1. **Data Collection**:
-   - The CU sends the `StartDataAcquisition` command to active smart bandages.
-   - Sensors collect wound condition data, which is transmitted back to the CU.
-
-2. **Device Discovery**:
-   - The `LookForLeaf` command ensures all bandages in the network are identified and functioning properly.
-
-3. **Data Processing**:
-   - The CU analyzes the data using machine learning algorithms to provide actionable insights.
-
-4. **Firmware Management**:
-   - Commands like `UpdateFirmware` and `ReinitializeSensor` ensure the system operates efficiently and reliably.
+The collected data is transmitted to the edge unit via UART and visualized using **Grafana** dashboards. Key parameters like temperature, humidity, and gas resistance are displayed in real-time.
 
 ---
 
 ## **Future Enhancements**
-- Develop advanced machine learning models for more accurate wound classification.
-- Implement bandage-to-bandage communication for decentralized networks.
-- Enhance scalability by supporting larger networks with minimal power consumption.
-
----
-
-## **Contributors**
-The project is developed by **Soumadeep** and collaborators, focusing on hardware design, software development, and testing.
-
----
-
-## **License**
-This repository is open-source and available under the [MIT License](LICENSE).
+- **Cloud Integration**: Remote monitoring through secure cloud platforms.
+- **Extended Sensor Array**: Addition of biochemical sensors for broader diagnostic capabilities.
+- **Enhanced Bandage Communication**: Mesh networking for larger deployments.
 
 ---
 
 ## **Contact**
-For inquiries or collaborations, please contact:
-**Soumadeep**  
-Email: [s.de@spartans.nsu.edu](mailto:de.soumadeep2023@gmail.com)
+For inquiries, please contact:
+**Soumadeep De**  
+Email: [s.de@spartans.nsu.edu](mailto:s.de@spartans.nsu.edu)
